@@ -10,20 +10,20 @@ import org.restlet.Context;
 import org.restlet.ext.servlet.ServerServlet;
 
 /**
- * Class implementing a Restlet Servlet, can be registered with OSGi HttpService 
+ * Class implementing a Restlet Servlet, can be registered with OSGi HttpService
+ * 
  * @author Ivan Grimaldi (grimaldi@ismb.it)
- *
+ * 
  */
-public class RestApplicationServlet extends ServerServlet{
-	
+public class RestApplicationServlet extends ServerServlet {
+
 	@Override
-	protected Application createApplication(Context context)
-	{
+	protected Application createApplication(Context context) {
 		return new JemmaApplication();
 	}
+
 	@Override
-	public void init(ServletConfig config) throws ServletException
-	{
+	public void init(ServletConfig config) throws ServletException {
 
 		super.init(config);
 	}

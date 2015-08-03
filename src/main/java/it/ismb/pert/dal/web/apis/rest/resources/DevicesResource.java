@@ -21,69 +21,65 @@ import com.google.gson.Gson;
 
 /**
  * A Restlet resource returning the list of all devices
+ * 
  * @author Ivan Grimaldi (grimaldi@ismb.it)
- *
+ * 
  */
 public class DevicesResource extends BaseServerResource {
-	private static final Logger LOG=LoggerFactory.getLogger(DevicesResource.class);
-			
+	private static final Logger LOG = LoggerFactory.getLogger(DevicesResource.class);
+
 	@Get("json")
-    public String represent() {
-    	
-    	Gson gson = new Gson();
-    	
-    	InvokeResponse resp=new InvokeResponse();
-    	//initially set 200, overwrite in case of exceptions
-    	resp.setCode(200);
-    	
-    	//Get all devices services
-    	BundleContext bc = FrameworkUtil.getBundle(DevicesResource.class).getBundleContext();
-    	ServiceReference[] deviceRefs = null;
+	public String represent() {
+
+		Gson gson = new Gson();
+
+		InvokeResponse resp = new InvokeResponse();
+		// initially set 200, overwrite in case of exceptions
+		resp.setCode(200);
+
+		// Get all devices services
+		BundleContext bc = FrameworkUtil.getBundle(DevicesResource.class).getBundleContext();
+		ServiceReference[] deviceRefs = null;
 		try {
-			deviceRefs = (ServiceReference[]) bc.getServiceReferences(
-				    Device.class.getName(),
-				    null);
-			
+			deviceRefs = (ServiceReference[]) bc.getServiceReferences(Device.class.getName(), null);
+
 			if (null == deviceRefs) {
 				LOG.info("No device reference found");
 				resp.setResult(new Vector());
-			    return gson.toJson(resp); // no such services
+				return gson.toJson(resp); // no such services
 			}
 			LOG.info("Found {} device references", deviceRefs.length);
 			for (int i = 0; i < deviceRefs.length; i++) {
-				LOG.info("Service reference: {}",deviceRefs[i]);
+				LOG.info("Service reference: {}", deviceRefs[i]);
 			}
 		} catch (InvalidSyntaxException e) {
-			LOG.error("Invalid filter syntax: {}",e);
+			LOG.error("Invalid filter syntax: {}", e);
 			resp.setCode(500);
 			resp.setMessage("Invalid filter syntax");
 			return gson.toJson(resp);
-			
+
 		}
-			
-		//Fill a map of devices parameters to be returned to the client
-		List<Map<String,Object>> devs=new LinkedList<Map<String,Object>>();
-		for(int i=0;i<deviceRefs.length;i++)
-		{
-			Map<String,Object> propMap=new HashMap<String,Object>();
-			for(int j=0;j<deviceRefs[i].getPropertyKeys().length;j++)
-			{
-				//ignore propery objectClass 
-				if(!deviceRefs[i].getPropertyKeys()[j].equals("objectClass"))
-				{
+
+		// Fill a map of devices parameters to be returned to the client
+		List<Map<String, Object>> devs = new LinkedList<Map<String, Object>>();
+		for (int i = 0; i < deviceRefs.length; i++) {
+			Map<String, Object> propMap = new HashMap<String, Object>();
+			for (int j = 0; j < deviceRefs[i].getPropertyKeys().length; j++) {
+				// ignore propery objectClass
+				if (!deviceRefs[i].getPropertyKeys()[j].equals("objectClass")) {
 					propMap.put(deviceRefs[i].getPropertyKeys()[j], deviceRefs[i].getProperty(deviceRefs[i].getPropertyKeys()[j]));
 					bc.ungetService(deviceRefs[i]);
 				}
 			}
 			devs.add(propMap);
-			
+
 		}
-		
+
 		this.addCustomHeaders();
-		
+
 		resp.setResult(devs);
-		
-		//write devices to client
+
+		// write devices to client
 		return gson.toJson(resp);
-    }
+	}
 }

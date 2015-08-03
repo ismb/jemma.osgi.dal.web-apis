@@ -12,24 +12,24 @@ import org.osgi.service.component.ComponentFactory;
 import org.osgi.service.component.ComponentInstance;
 
 /**
- * WebSocket Servlet implementation. Uses OSGi ComponentFactory to instantiate handlers
+ * WebSocket Servlet implementation. Uses OSGi ComponentFactory to instantiate
+ * handlers
+ * 
  * @author Ivan Grimaldi (grimaldi@ismb.it)
- *
+ * 
  */
-public class OverLoadsWebSocketHandler extends WebSocketServlet{
-	
-	private int webSocketClients=0;
+public class OverLoadsWebSocketHandler extends WebSocketServlet {
+
+	private int webSocketClients = 0;
 	private ComponentFactory webSocketFactory;
-		
+
 	public OverLoadsWebSocketHandler(ComponentFactory webSocketFactory) {
-		this.webSocketFactory=webSocketFactory;
+		this.webSocketFactory = webSocketFactory;
 	}
 
 	public WebSocket doWebSocketConnect(HttpServletRequest servlet, String protocol) {
-		ComponentInstance instance=webSocketFactory.newInstance(new Hashtable());
-		return  (WebSocket) instance.getInstance();
+		ComponentInstance instance = webSocketFactory.newInstance(new Hashtable());
+		return (WebSocket) instance.getInstance();
 	}
 
-
-	
 }

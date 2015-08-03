@@ -17,77 +17,73 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 /**
- * A WebSocket handler. receives subscription filters and subscribes to DAL topics on OSGi EventAdmin
+ * A WebSocket handler. receives subscription filters and subscribes to DAL
+ * topics on OSGi EventAdmin
+ * 
  * @author Ivan Grimaldi (grimaldi@ismb.it)
- *
+ * 
  */
-public class OverloadEventWebSocket implements EventHandler,WebSocket.OnTextMessage{
+public class OverloadEventWebSocket implements EventHandler, WebSocket.OnTextMessage {
 
 	private Connection connection;
 	private ComponentContext context;
 	private ServiceRegistration registration;
 	private Gson gson;
-	
-	protected void activate(ComponentContext context)
-	{
-		this.context=context;
-		gson=new Gson();
+
+	protected void activate(ComponentContext context) {
+		this.context = context;
+		gson = new Gson();
 		registerEventHandler();
 	}
-	
-	
+
 	public void onClose(int closeCode, String message) {
-		//unregister the eventhandler
+		// unregister the eventhandler
 		unregisterEventHandlerService();
 	}
 
 	public void onOpen(Connection connection) {
-		this.connection=connection;
+		this.connection = connection;
 	}
 
 	public void onMessage(String message) {
-		//nothing to do
-		
-	}
+		// nothing to do
 
+	}
 
 	private void registerEventHandler() {
 
-			
-		//Prepare properties for event filter to be used with EventAdmin
-		Hashtable properties=new Hashtable();
+		// Prepare properties for event filter to be used with EventAdmin
+		Hashtable properties = new Hashtable();
 		properties.put(EventConstants.EVENT_TOPIC, "ah/eh/overload/*");
-		
-		
-		//unregister previous event handler
+
+		// unregister previous event handler
 		unregisterEventHandlerService();
-		
-		//register event handlers
-		registration=this.context.getBundleContext().registerService(EventHandler.class.getName(), this, properties);
+
+		// register event handlers
+		registration = this.context.getBundleContext().registerService(EventHandler.class.getName(), this, properties);
 	}
 
 	public void handleEvent(Event arg0) {
-		//an event mathcing the filter specified by the client have been received		
+		// an event mathcing the filter specified by the client have been
+		// received
 		try {
 			this.connection.sendMessage(gson.toJson(arg0));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public void unregisterEventHandlerService() {
-		if(registration!=null)
-		{
-			try{
+		if (registration != null) {
+			try {
 				registration.unregister();
-			}catch(IllegalStateException e)
-			{
-				//do nothing, the service was unregistered before
+			} catch (IllegalStateException e) {
+				// do nothing, the service was unregistered before
 			}
 		}
-		
+
 	}
 
 }
