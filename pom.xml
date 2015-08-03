@@ -15,10 +15,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	
 		<!-- Internal dependencies version properties -->
-		<org.energy-home.jemma.drafts.org.osgi.osgi.service.dal.functions.version>1.0.1</org.energy-home.jemma.drafts.org.osgi.osgi.service.dal.functions.version>
-		<org.energy-home.jemma.drafts.org.osgi.osgi.service.dal.version>1.0.1</org.energy-home.jemma.drafts.org.osgi.osgi.service.dal.version>
-		<org.energy-home.jemma.osgi.ah.hac.lib.version>3.1.5</org.energy-home.jemma.osgi.ah.hac.lib.version>
-		<org.energy-home.jemma.osgi.dal.functions.eh.version>1.0.1</org.energy-home.jemma.osgi.dal.functions.eh.version>
+		<org.energy-home.jemma.drafts.org.osgi.osgi.service.dal.functions.version>1.0.2</org.energy-home.jemma.drafts.org.osgi.osgi.service.dal.functions.version>
+		<org.energy-home.jemma.drafts.org.osgi.osgi.service.dal.version>1.0.2</org.energy-home.jemma.drafts.org.osgi.osgi.service.dal.version>
+		<org.energy-home.jemma.osgi.ah.hac.lib.version>3.1.6</org.energy-home.jemma.osgi.ah.hac.lib.version>
+		<org.energy-home.jemma.osgi.dal.functions.eh.version>1.0.2</org.energy-home.jemma.osgi.dal.functions.eh.version>
 		
 		<!-- External dependencies version properties -->
 		<com.google.code.gson.version>2.2.4</com.google.code.gson.version>
