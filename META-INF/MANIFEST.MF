@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1438080693336
+Bnd-LastModified: 1438598153371
 Build-Jdk: 1.8.0_45
 Built-By: tomasi
 Bundle-ActivationPolicy: lazy
@@ -26,12 +26,12 @@ Import-Package: org.slf4j;version="[1.6,2)",org.osgi.framework;version="
  version="2.5.0",org.eclipse.jetty.websocket;version="8.1.16",org.osgi.s
  ervice.http;version="1.2.1",org.restlet,org.restlet.engine.header,org.r
  estlet.ext.servlet,org.restlet.representation,org.restlet.resource,org.
- restlet.routing,org.restlet.util,org.energy_home.jemma.ah.hac;version="
- [3.0.2,3.1.0)",org.eclipse.jetty.server;version="8.1.16",org.eclipse.je
- tty.util;version="8.1.16",org.osgi.service.dal.functions;version="[1.0,
- 2)",org.energy_home.dal.functions.type;version="[1.0,2)",org.osgi.servi
- ce.dal.functions.dataorg.energy_home.dal.functions,org.energy_home.jemm
- a.ah.hac.lib.ext;version="[3.4.0,3.5.0)",org.restlet.data
+ restlet.routing,org.restlet.util,org.osgi.service.dal.functions.dataorg
+ .energy_home.dal.functions,org.energy_home.dal.functions.type;version="
+ [1.0,2)",org.energy_home.jemma.ah.hac.lib.ext;version="[3.4.0,3.5.0)",o
+ rg.energy_home.jemma.ah.hac;version="[3.0.2,3.1.0)",org.osgi.service.da
+ l.functions;version="[1.0,2)",org.eclipse.jetty.server;version="8.1.16"
+ ,org.restlet.data,org.eclipse.jetty.util;version="8.1.16"
 Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.5))"
 Service-Component: OSGI-INF/*.xml
 Tool: Bnd-2.3.0.201405100607
