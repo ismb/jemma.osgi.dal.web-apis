@@ -90,7 +90,7 @@
 							org.osgi.service.event,
 							org.osgi.service.dal,
 							org.osgi.service.dal.functions,
-							org.osgi.service.dal.functions.data
+							org.osgi.service.dal.functions.data,
 							org.energy_home.dal.functions,
 							org.energy_home.dal.functions.type,
 							org.energy_home.jemma.ah.hac;version="[3.0.2,3.1.0)",
